@@ -3,6 +3,7 @@ package tk.vicochu.spring.mvc.chaos.monkey.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -28,9 +29,13 @@ import java.util.List;
 @Profile("chaos-monkey")
 public class ChaosMonkeyConfiguration implements ApplicationContextAware {
     private static final Logger LOGGER = LoggerFactory.getLogger(ChaosMonkey.class);
+    @Autowired
     private ChaosMonkeyProperties chaosMonkeyProperties;
+    @Autowired
     private WatcherProperties watcherProperties;
+    @Autowired
     private AssaultProperties assaultProperties;
+
     private ApplicationContext applicationContext;
 
     public ChaosMonkeyConfiguration() {
@@ -43,12 +48,13 @@ public class ChaosMonkeyConfiguration implements ApplicationContextAware {
 
     }
 
-    @PostConstruct
-    public void initChaosMonkeyConfiguration() {
-        this.chaosMonkeyProperties = applicationContext.getBean(ChaosMonkeyProperties.class);
-        this.watcherProperties = applicationContext.getBean(WatcherProperties.class);
-        this.assaultProperties = applicationContext.getBean(AssaultProperties.class);
-    }
+//    //TODO should not use applicationContext to inject
+//    @PostConstruct
+//    public void initChaosMonkeyConfiguration() {
+//        this.chaosMonkeyProperties = applicationContext.getBean(ChaosMonkeyProperties.class);
+//        this.watcherProperties = applicationContext.getBean(WatcherProperties.class);
+//        this.assaultProperties = applicationContext.getBean(AssaultProperties.class);
+//    }
 
     @Bean
     public ChaosMonkeySettings settings() {

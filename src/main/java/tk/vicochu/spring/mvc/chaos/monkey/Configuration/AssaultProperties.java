@@ -18,7 +18,6 @@ import java.util.concurrent.ThreadLocalRandom;
 @NoArgsConstructor
 @Validated
 @Component
-@PropertySource("classpath:application.properties")
 public class AssaultProperties {
     @Value("${chaos.monkey.assaults.level:5}")
     @Min(value = 1)

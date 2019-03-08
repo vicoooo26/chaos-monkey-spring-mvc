@@ -163,7 +163,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -206,4 +206,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build></project>
+    </build>
+</project>

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Component
-@PropertySource("classpath:application.properties")
 public class ChaosMonkeyProperties {
 
     @Value("${chaos.monkey.enabled:false}")
