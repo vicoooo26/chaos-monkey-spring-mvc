@@ -2,13 +2,50 @@
 
 Chaos Monkey for Spring MVC simplifies [Chao Monkey Spring Boot](https://github.com/codecentric/chaos-monkey-spring-boot) which is inspired by [Netflix Chaos Monkey](https://github.com/Netflix/chaosmonkey). This project puts a Chaos Monkey into Spring MVC & Spring Boot applications and will try to attack your running Spring App.
 
+## How to Import
+
+For Spring Boot application, all you need is importing chaos-monkey-spring-mvc.jar into your app's dependency. In IDEA you can follow the path: File -> Project Structure -> modules -> Dependencies -> + -> 1 JARs or directories... then add your local chaos-monkey-spring-mvc.jar.
+
+For Spring MVC application, there is one more step before you use chaos monkey. You have to install the local chaos-monkey-spring-mvc.jar file into your local Maven Repository. You can adapt the following command and all on one line.
+
+```
+mvn install:install-file \
+   -Dfile=<path-to-file> \
+   -DgroupId=<group-id> \
+   -DartifactId=<artifact-id> \
+   -Dversion=<version> \
+   -Dpackaging=<packaging> \
+   -DgeneratePom=true
+
+Where each refers to:
+< path-to-file >: the path to the file to load e.g -> c:\chaos-monkey-spring-mvc-1.0.jar
+
+< group-id >: the group that the file should be registered under e.g -> tk.vicochu
+
+< artifact-id >: the artifact name for the file e.g -> chaos-monkey-spring-mvc
+
+< version >: the version of the file e.g -> 1.0
+
+< packaging >: the packaging of the file e.g. -> jar
+```
+
+Then you can import chaos monkey dependency by adding a code block in pom.xml of your Maven project.
+
+```
+<dependency>
+    <groupId>tk.vicochu</groupId>
+    <artifactId>chaos-monkey-spring-mvc</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
 ## Getting Started
 
-Import chaos-monkey-spring-mvc.jar into your app's dependency and make sure that your Spring App running profile is **chaos-monkey**. `spring.profiles.active=chaos-monkey`
+Before your chaos monkey is ready, make sure that your Spring App running/active profile is **chaos-monkey**. `spring.profiles.active=chaos-monkey`
 
-What's more, make sure that your Spring App could scan chaos-monkey-spring-mvc and add them into your **Spring Bean Container Management** via `@ComponentScan` annotation or `<context:component-scan>` tag.
+What's more, make sure that your Spring App could scan chaos-monkey-spring-mvc components and add them into your **Spring Bean Container Management** via `@ComponentScan` annotation or `<context:component-scan>` tag.
 
-You could configure your chaos monkey in **application.properties** file as follow:
+Now you could configure your own chaos monkey in **application.properties** file as follow:
 
 ```
 #enable a chaos monkey
